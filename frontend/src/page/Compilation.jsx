@@ -31,7 +31,7 @@ const Compilation = () => {
         }
     };
 
-    const applyFilter = () => {
+    const applyFilter = React.useCallback(() => {
         let productsCopy = products.slice();
         if (showSearch && search) {
             productsCopy = productsCopy.filter((item) =>
@@ -49,7 +49,7 @@ const Compilation = () => {
             );
         }
         setFillerProducts(productsCopy);
-    };
+    }, [products, showSearch, search, category, subCategory]);
 
     const sortProduct = () => {
         let fpCopy = filterProducts.slice();
@@ -71,7 +71,7 @@ const Compilation = () => {
 
     useEffect(() => {
         applyFilter();
-    }, [category, subCategory, search, showSearch, products]);
+    }, [category, subCategory, search, showSearch, products, applyFilter]);
 
     useEffect(() => {
         sortProduct();
