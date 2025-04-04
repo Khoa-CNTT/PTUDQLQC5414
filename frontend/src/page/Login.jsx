@@ -33,7 +33,7 @@ const Login = () => {
                 if (response.data.success) {
                     if (currentState === 'Login') {
                         //setToken khi login
-                        login(response.data.token);
+                        login(response.data.token,response.data.name);
                         //
                     } else if (currentState === 'Forgot Password') {
                         setMessage("A reset link has been sent to your email.");

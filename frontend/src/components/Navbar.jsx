@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { assets } from '../assets/assets';
 import { Link, NavLink } from 'react-router-dom';
 import { ShopContext } from '../context/ShopContext';
@@ -14,9 +14,23 @@ const NavBar = () => {
         navigate,
         token,
         logout,
+        name,
+        setName,
         setCartItems
     } = useContext(ShopContext);
 
+    //
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        const storedName = localStorage.getItem('name');
+        if (token && storedName) {
+            setName(storedName);
+        } else {
+            //
+        }
+    }, []);
+
+    //
     const logoutevent = () => {
         //logout remove Token
         logout()
@@ -69,12 +83,16 @@ const NavBar = () => {
                 />
 
                 <div className='group relative'>
-                    <img
-                        onClick={() => (token ? null : navigate('/login'))}
-                        src={token ? assets.logo_person : assets.profile_icon} // Sửa src dựa trên điều kiện token
-                        className={`w-5 cursor-pointer ${token ? 'w-8 rounded-full' : ''}`}
-                        style={{ filter: 'invert(1)' }} // Chỉnh lại màu sắc cho img khi không dùng text-white cho font-awesome
-                    />
+                    <div className='flex items-center'>
+                        <img
+                            onClick={() => (token ? null : navigate('/login'))}
+                            src={token ? assets.logo_person : assets.profile_icon} // Sửa src dựa trên điều kiện token
+                            className={`w-5 cursor-pointer ${token ? 'w-8 rounded-full' : ''}`}
+                            style={{ filter: 'invert(1)' }} // Chỉnh lại màu sắc cho img khi không dùng text-white cho font-awesome
+                        />
+                        {token ? <p className='text-gray-400 pl-1'>{name}</p> : ''}
+                    </div>
+
 
                     {/* Dropdown menu chỉ hiển thị khi có token */}
                     {token && (
@@ -116,6 +134,7 @@ const NavBar = () => {
                     src={assets.menu_icon}
                     alt=''
                     className='w-5 cursor-pointer sm:hidden'
+                    style={{ filter: 'invert(1)' }}
                 />
             </div>
 
@@ -132,6 +151,7 @@ const NavBar = () => {
                             src={assets.dropdown_icon}
                             alt=''
                             className='h-4 rotate-180'
+                            style={{ filter: 'invert(1)' }}
                         />
                         <p>Back</p>
                     </div>
@@ -145,9 +165,9 @@ const NavBar = () => {
                     <NavLink
                         onClick={() => setVisible(false)}
                         className='py-2 pl-6 border'
-                        to='/collection'
+                        to='/COMPILATION'
                     >
-                        COLLECTION
+                        COMPILATION
                     </NavLink>
                     <NavLink
                         onClick={() => setVisible(false)}
