@@ -13,8 +13,22 @@ const ShopContextProvider = (props) => {
     const [showSearch, setShowSearch] = useState(false);
     const [cartItems, setCartItems] = useState({});
     const [products, setProducts] = useState([]);
+    //
     const [token, setToken] = useState('');
+    //
     const navigate = useNavigate();
+
+    const login = (token) => {
+        localStorage.setItem('token', token);
+        setToken(token);
+        navigate('/');
+    };
+
+    const logout = () => {
+        localStorage.removeItem('token');
+        setToken('');
+        navigate('/login');
+    };
 
     const addToCart = (itemId, size) => {
         if (!size) {
@@ -162,8 +176,10 @@ const ShopContextProvider = (props) => {
         getCartAmount,
         navigate,
         backendUrl,
-        setToken,
-        token
+        login,
+        logout,
+        token,
+        setToken
     };
 
     return (

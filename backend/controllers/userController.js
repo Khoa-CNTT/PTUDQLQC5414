@@ -6,8 +6,12 @@ import nodemailer from "nodemailer";
 import crypto from "crypto";
 
 // Tạo token JWT
-const createToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "7d" });
+const createToken = (user) => {
+    return jwt.sign(
+        { _id: user._id, email: user.email },
+        process.env.JWT_SECRET,
+        { expiresIn: '7d' }
+    );
 };
 
 // Đăng ký người dùng
@@ -160,4 +164,37 @@ const resetPassword = async (req, res) => {
     }
 };
 
-export { loginUser, registerUser, forgotPassword, resetPassword };
+//lay User profile theo userId của từng tk
+const getProfileUser = (req, res) => {
+    const userId = req.user._id; //* Lấy userId từ token
+
+    userModel.findOne({ _id: userId }) // Tìm user theo userId từ token
+        .then(user => {
+            if (!user) {
+                return res.status(404).json({ error: 'User not found' });
+            }
+            res.json(user); // Trả về thông tin user
+        })
+        .catch(error => {
+            console.error('Error fetching user:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        });
+};
+
+// Cập nhật profile
+const putProfileUser = (req, res) => {
+    const { phonenumber, address, city, country } = req.body;
+    userModel.findOneAndUpdate({ name: req.body.name }, { phonenumber, address, city, country }, { new: true })
+        .then(updatedUser => {
+            if (!updatedUser) {
+                return res.status(404).json({ error: 'User not found' });
+            }
+            res.json(updatedUser);
+        })
+        .catch(error => {
+            console.error('Error updating profile:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        });
+};
+
+export { loginUser, registerUser, forgotPassword, resetPassword, getProfileUser, putProfileUser };

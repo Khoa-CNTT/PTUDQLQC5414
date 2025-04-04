@@ -13,14 +13,13 @@ const NavBar = () => {
         getCartCount,
         navigate,
         token,
-        setToken,
+        logout,
         setCartItems
     } = useContext(ShopContext);
 
-    const logout = () => {
-        navigate('/login');
-        localStorage.removeItem('token');
-        setToken('');
+    const logoutevent = () => {
+        //logout remove Token
+        logout()
         setCartItems({});
     };
 
@@ -65,36 +64,42 @@ const NavBar = () => {
                     onClick={() => setShowSearch(true)}
                     src={assets.search_icon}
                     alt=''
-                    className='w-5 cursor-pointerbg'
+                    className='w-5 cursor-pointer'
                     style={{ filter: 'invert(1)' }} //chỉnh lại màu sắc cho img cho trường hợp ko dùng text-white cho font-awesome
                 />
 
                 <div className='group relative'>
                     <img
                         onClick={() => (token ? null : navigate('/login'))}
-                        src={assets.profile_icon}
-                        className='w-5 cursor-pointer'
-                        style={{ filter: 'invert(1)' }} //chỉnh lại màu sắc cho img cho trường hợp ko dùng text-white cho font-awesome
+                        src={token ? assets.logo_person : assets.profile_icon} // Sửa src dựa trên điều kiện token
+                        className={`w-5 cursor-pointer ${token ? 'w-8 rounded-full' : ''}`}
+                        style={{ filter: 'invert(1)' }} // Chỉnh lại màu sắc cho img khi không dùng text-white cho font-awesome
                     />
+
+                    {/* Dropdown menu chỉ hiển thị khi có token */}
                     {token && (
-                        <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4 z-10'>
+                        <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-1 z-10'>
                             <div className='flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded'>
-                                <p className='cursor-pointer hover:text-black'>
+                                <p
+                                    onClick={() => navigate('/profile')}
+                                    className='cursor-pointer hover:text-black'>
                                     My Profile
                                 </p>
-                                <p onClick={() => navigate('/orders')} className='cursor-pointer hover:text-black'>
+                                <p
+                                    onClick={() => navigate('/orders')}
+                                    className='cursor-pointer hover:text-black'>
                                     Orders
                                 </p>
                                 <p
-                                    onClick={logout}
-                                    className='cursor-pointer hover:text-black'
-                                >
+                                    onClick={logoutevent}
+                                    className='cursor-pointer hover:text-black'>
                                     Logout
                                 </p>
                             </div>
                         </div>
                     )}
                 </div>
+
                 <Link to='/cart' className='relative'>
                     <img
                         src={assets.cart_icon}

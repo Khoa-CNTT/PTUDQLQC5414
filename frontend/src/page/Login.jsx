@@ -1,10 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { ShopContext } from '../context/ShopContext';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Login = () => {
     const [currentState, setCurrentState] = useState('Login');
-    const { token, setToken, navigate, backendUrl } = useContext(ShopContext);
+    const { login, backendUrl } = useContext(ShopContext);
 
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
@@ -21,7 +22,6 @@ const Login = () => {
             url += 'register';
             data.name = name;
         } else if (currentState === 'Forgot Password') {
-            // Gửi yêu cầu reset mật khẩu
             url += 'forgot-password';
             data.email = email;
         } else {
@@ -32,8 +32,9 @@ const Login = () => {
             .then(response => {
                 if (response.data.success) {
                     if (currentState === 'Login') {
-                        setToken(response.data.token);
-                        localStorage.setItem('token', response.data.token);
+                        //setToken khi login
+                        login(response.data.token);
+                        //
                     } else if (currentState === 'Forgot Password') {
                         setMessage("A reset link has been sent to your email.");
                         setCurrentState('Login');
@@ -47,12 +48,6 @@ const Login = () => {
                 toast.error(error.message || 'An error occurred');
             });
     };
-
-    useEffect(() => {
-        if (token) {
-            navigate('/');
-        }
-    }, [token]);
 
     return (
         <div className='flex justify-center pb-16'>
