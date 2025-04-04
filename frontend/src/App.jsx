@@ -9,6 +9,7 @@ import SearchBar from "./components/SearchBar";
 import Compilation from "./page/Compilation";
 import Login from "./page/Login";
 import ResetPassword from "./page/ResetPassword";
+import Profile from "./page/Profile";
 
 
 export const backendUrl = import.meta.env.VITE_BACKEND_URL
@@ -32,6 +33,7 @@ const App = () => {
             <Route path="/product/:productId" element={<Product />} />
             <Route path="/login" element={<Login />} />
             <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </>
       </div>
