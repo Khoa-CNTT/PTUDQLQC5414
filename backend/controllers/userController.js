@@ -84,6 +84,21 @@ const loginUser = async (req, res) => {
     }
 };
 
+const adminLogin = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
+            const token = jwt.sign(email + password, process.env.JWT_SECRET);
+            res.json({ success: true, token })
+        } else {
+            res.json({ success: false, message: "Invalid credentials" })
+        }
+    } catch (err) {
+        console.error(err);
+        res.json({ success: false, message: err.message })
+    }
+}
+
 // Cấu hình transporter cho nodemailer
 const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -197,4 +212,4 @@ const putProfileUser = (req, res) => {
         });
 };
 
-export { loginUser, registerUser, forgotPassword, resetPassword, getProfileUser, putProfileUser };
+export { loginUser, registerUser, adminLogin, forgotPassword, resetPassword, getProfileUser, putProfileUser };
