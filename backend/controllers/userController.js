@@ -76,7 +76,7 @@ const loginUser = async (req, res) => {
 
         // Tạo token
         const token = createToken(user._id);
-        return res.status(200).json({ success: true, token });
+        return res.status(200).json({ success: true, token, name: user.name });
 
     } catch (error) {
         console.error(error);

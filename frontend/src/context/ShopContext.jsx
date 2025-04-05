@@ -13,20 +13,26 @@ const ShopContextProvider = (props) => {
     const [showSearch, setShowSearch] = useState(false);
     const [cartItems, setCartItems] = useState({});
     const [products, setProducts] = useState([]);
+    const [name, setName] = useState([]);
     //
     const [token, setToken] = useState('');
     //
     const navigate = useNavigate();
 
-    const login = (token) => {
+    //
+    const login = (token, name) => {
         localStorage.setItem('token', token);
+        localStorage.setItem('name', name);
         setToken(token);
+        setName(name)
         navigate('/');
     };
 
     const logout = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('name');
         setToken('');
+        setName('')
         navigate('/login');
     };
 
@@ -178,6 +184,8 @@ const ShopContextProvider = (props) => {
         backendUrl,
         login,
         logout,
+        name,
+        setName,
         token,
         setToken
     };
