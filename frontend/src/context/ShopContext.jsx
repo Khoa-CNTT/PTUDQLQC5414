@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 export const ShopContext = createContext();
 
+
 //nơi chứa global state giúp chuyển dữ liệu sang các components con
 const ShopContextProvider = (props) => {
     const currency = '$';
