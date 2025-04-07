@@ -37,7 +37,7 @@ const addProduct = async (req, res) => {
         res.json({ success: true, message: "Product saved successfully" })
 
     } catch (err) {
-        console.eror(err);
+        console.error(err);
         res.json({ success: false, message: err.message })
     }
 }
