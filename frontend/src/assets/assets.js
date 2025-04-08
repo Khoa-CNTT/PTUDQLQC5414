@@ -11,7 +11,7 @@ import star_icon from './star_icon.png'
 import support_img from './support_img.png'
 import menu_icon from './menu_icon.png'
 import contact_img from './contact_img.png'
-import stripe_logo from './stripe_logo.png'
+import paypal_logo from './paypal_log0.png'
 import cross_icon from './cross_icon.png'
 import a_cup from './a-cup.jpg'
 import about_us from './about-us-img.jpg'
@@ -26,6 +26,7 @@ export const assets = {
     exchange_icon,
     profile_icon,
     logo_person,
+    paypal_logo,
     quality_icon,
     search_icon,
     star_dull_icon,
@@ -34,7 +35,6 @@ export const assets = {
     support_img,
     menu_icon,
     contact_img,
-    stripe_logo,
     cross_icon,
     a_cup,
     about_us

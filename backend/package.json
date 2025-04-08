@@ -19,6 +19,7 @@
   "homepage": "https://github.com/minhle0501/KhoaLuanTotNghiep2025-Cafe#readme",
   "description": "",
   "dependencies": {
+    "@paypal/checkout-server-sdk": "^1.0.3",
     "bcrypt": "^5.1.1",
     "cloudinary": "^2.6.0",
     "cors": "^2.8.5",
