@@ -30,7 +30,7 @@ const IntroduceBackground = () => {
     }, []);
 
     return (
-        <div className='flex flex-col sm:flex-row border max-h-80 border-gray-400 relative'>
+        <div className='flex flex-col sm:flex-row border max-h-96 border-gray-400 relative'>
             <div className='w-full sm:w-1/3 flex items-center justify-center py-10 sm:py-0 bg-orange-100'>
                 <div className='text-[#414141] pl-10'>
                     <div className='flex items-center gap-2'>

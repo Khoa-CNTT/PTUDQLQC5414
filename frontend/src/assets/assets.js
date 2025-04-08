@@ -10,11 +10,11 @@ import star_dull_icon from './star_dull_icon.png'
 import star_icon from './star_icon.png'
 import support_img from './support_img.png'
 import menu_icon from './menu_icon.png'
-import contact_img from './contact_img.png'
+import contact_us from './contact.jpg'
 import paypal_logo from './paypal_log0.png'
 import cross_icon from './cross_icon.png'
 import a_cup from './a-cup.jpg'
-import about_us from './about-us-img.jpg'
+import about from './about_uss.jpg'
 import back_coffe3 from './back-coffee-3.jpg'
 import back_coffe4 from './back-coffee-4.jpg'
 
@@ -34,8 +34,8 @@ export const assets = {
     bin_icon,
     support_img,
     menu_icon,
-    contact_img,
+    contact_us,
     cross_icon,
     a_cup,
-    about_us
+    about
 }
