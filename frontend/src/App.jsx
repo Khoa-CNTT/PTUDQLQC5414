@@ -11,6 +11,8 @@ import Login from "./page/Login";
 import ResetPassword from "./page/ResetPassword";
 import Profile from "./page/Profile";
 import Cart from "./page/Cart";
+import Checkout from "./page/Checkout";
+import Verify from "./page/Verify";
 
 
 export const backendUrl = import.meta.env.VITE_BACKEND_URL
@@ -36,6 +38,8 @@ const App = () => {
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/verify" element={<Verify />} />
           </Routes>
         </>
       </div>
