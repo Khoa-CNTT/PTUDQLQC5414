@@ -1,11 +1,15 @@
 import React, { useEffect, useContext, useState } from 'react';
-import { ProfileContext } from '../context/ProfileContext';
 import { ShopContext } from '../context/ShopContext';
 import axios from 'axios';
 import { assets } from '../assets/assets';
 
 function Profile() {
-    const { name, phonenumber, address, city, country, setName, setPhonenumber, setAddress, setCity, setCountry } = useContext(ProfileContext)
+    const [name, setName] = useState('');
+    const [phonenumber, setPhonenumber] = useState('');
+    const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [country, setCountry] = useState('');
+
     const { token, backendUrl } = useContext(ShopContext);
 
     useEffect(() => {

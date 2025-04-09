@@ -13,9 +13,8 @@ import Profile from "./page/Profile";
 import Cart from "./page/Cart";
 import Checkout from "./page/Checkout";
 import Verify from "./page/Verify";
-
-
-export const backendUrl = import.meta.env.VITE_BACKEND_URL
+import About from "./page/About";
+import Contact from "./page/Contact";
 
 //nơi chứa các components chính và định tuyến router
 const App = () => {
@@ -33,6 +32,9 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/compilation" element={<Compilation />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+
             <Route path="/product/:productId" element={<Product />} />
             <Route path="/login" element={<Login />} />
             <Route path="/reset-password" element={<ResetPassword />} />
