@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom'
 import Login from './components/Login'
 import AddItems from './page/AddItems'
 import AllListItems from './page/AllListItems'
+import UpdateProduct from './page/UpdateProduct'
 
 export const backendUrl = import.meta.env.VITE_BACKEND_URL
 export const currency = '$'
@@ -29,6 +30,7 @@ const App = () => {
                 <Routes>
                   <Route path='/admin-add' element={<AddItems token={token} />} />
                   <Route path='/admin-list' element={<AllListItems token={token} />} />
+                  <Route path="/admin-list/update/:id/edit" element={<UpdateProduct token={token} />} />
                 </Routes>
               </div>
             </div>
