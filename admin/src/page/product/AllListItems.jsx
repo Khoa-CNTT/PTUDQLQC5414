@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { backendUrl, currency } from '../App'
+import { backendUrl, currency } from '../../App'
 import { Link } from 'react-router-dom'
 
 const AllListItems = ({ token }) => {
