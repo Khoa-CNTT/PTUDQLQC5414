@@ -1,6 +1,8 @@
 import { v2 as cloudinary } from "cloudinary"
 import productModel from "../models/productModel.js"
 
+
+//admin
 const addProduct = async (req, res) => {
     try {
         const { name, description, price, category, subCategory, sizes, bestseller } = req.body
@@ -42,6 +44,47 @@ const addProduct = async (req, res) => {
     }
 }
 
+const removeProduct = async (req, res) => {
+    try {
+        await productModel.deleteOne({ _id: req.body._id })
+        res.json({ success: true, message: "Product deleted successfully" })
+    } catch (err) {
+
+    }
+}
+
+// GET
+const getUpdateId = async (req, res) => {
+    try {
+        const productId = req.params.id;
+
+        // Tìm sản phẩm theo ID
+        const product = await productModel.findById(productId); // ID thử nghiệm
+
+
+        if (!product) {
+            return res.status(404).json({ message: 'Không tìm thấy sản phẩm.' });
+        }
+
+        // Trả về thông tin sản phẩm nếu tìm thấy
+        res.status(200).json(product);
+
+    } catch (error) {
+        console.error("Lỗi khi lấy sản phẩm:", error);
+        res.status(500).json({ message: 'Lỗi server: ' + error.message });
+    }
+};
+
+//PUT
+const putUpdateId = async (req, res) => {
+    try {
+        await productModel.updateOne({ _id: req.params.id }, req.body);
+        res.status(200).json({ success: true });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+};
+
 const listProduct = async (req, res) => {
     try {
         const products = await productModel.find({});
@@ -49,15 +92,6 @@ const listProduct = async (req, res) => {
     } catch (err) {
         console.eror(err);
         res.json({ success: false, message: err.message })
-    }
-}
-
-const removeProduct = async (req, res) => {
-    try {
-        await productModel.findByIdAndDelete(req.body.id)
-        res.json({ success: true, message: "Product deleted successfully" })
-    } catch (err) {
-
     }
 }
 
@@ -71,4 +105,4 @@ const singleProduct = async (req, res) => {
         res.json({ success: false, message: err.message })
     }
 }
-export { addProduct, removeProduct, listProduct, singleProduct }
+export { addProduct, removeProduct, listProduct, singleProduct, getUpdateId, putUpdateId }
