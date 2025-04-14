@@ -9,6 +9,7 @@ import UpdateProduct from './page/product/UpdateProduct'
 import AddCategories from './page/category/AddCategories'
 import AllCategories from './page/category/AllCategories'
 import UpdateCategory from './page/category/UpdateCategory'
+import AllOrders from './page/order/AllOrders'
 
 export const backendUrl = import.meta.env.VITE_BACKEND_URL
 export const currency = '$'
@@ -40,6 +41,9 @@ const App = () => {
                   <Route path="/admin-add-category" element={<AddCategories token={token} />} />
                   <Route path="/admin-category" element={<AllCategories token={token} />} />
                   <Route path="/admin-category/update/:id/edit" element={<UpdateCategory token={token} />} />
+
+                  {/* order */}
+                  <Route path="/admin-order" element={<AllOrders token={token} />} />
                 </Routes>
               </div>
             </div>
