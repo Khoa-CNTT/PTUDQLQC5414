@@ -20,12 +20,14 @@ import Contact from "./page/Contact";
 const App = () => {
   return (
     <div>
-      <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]"
+      <div
+        className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]"
         style={{
           background: `linear-gradient(rgba(0, 0, 0, 0.450), rgba(0, 0, 0, 0.500)), url(${assets.a_cup})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center',
-        }}>
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
+        }}
+      >
         <NavBar />
         <SearchBar />
         <>
@@ -46,17 +48,11 @@ const App = () => {
         </>
       </div>
 
-      <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
+      <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw] border border-gray-300">
         <Footer />
       </div>
     </div>
   );
-}
+};
 
 export default App;
-
-
-
-
-
-

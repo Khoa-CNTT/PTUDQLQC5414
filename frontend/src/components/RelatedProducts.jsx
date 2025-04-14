@@ -27,7 +27,7 @@ const RelatedProducts = ({ category, subCategory }) => {
     }, [products, category, subCategory]); // Chạy lại khi dữ liệu sản phẩm hoặc danh mục thay đổi
 
     return (
-        <div className='my-24'>
+        <div className='mt-24 pb-10'>
             {/* Tiêu đề "RELATED PRODUCTS" */}
             <div className='text-center text-3xl py-2'>
                 <Label text1={'RELATED'} text2={'PRODUCTS'} />
