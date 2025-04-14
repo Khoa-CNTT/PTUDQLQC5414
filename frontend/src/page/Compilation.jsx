@@ -95,7 +95,7 @@ const Compilation = () => {
     }, [sortType]);
 
     return (
-        <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t'>
+        <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t pb-28 '>
             <div className='min-w-60 text-white'>
                 <p
                     onClick={() => setShowFilter(!showFilter)}
@@ -110,7 +110,7 @@ const Compilation = () => {
                 </p>
 
                 {/* CATEGORY FILTER */}
-                <div className={`border border-gray-300 pl-5 py-3 mt-6 ${showFilter ? '' : 'hidden'} sm:block`}>
+                <div className={`border border-gray-300 px-3 py-3 mt-6 ${showFilter ? '' : 'hidden'} sm:block`}>
                     <p className='mb-3 text-sm font-medium text-white'>CATEGORIES</p>
                     <div className='flex flex-col gap-2 text-sm font-light text-white'>
                         {categories.map((cat, index) => (
@@ -165,7 +165,7 @@ const Compilation = () => {
                     </select>
                 </div>
 
-                <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
+                <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6 '>
                     {filterProducts.map((item, index) => (
                         <MerchandiseItems
                             key={index}
