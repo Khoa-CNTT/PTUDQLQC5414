@@ -56,7 +56,11 @@ const ShopContextProvider = (props) => {
         setCartItems(cartData);
 
         if (token) {
-            axios.post(`${backendUrl}/api/cart/add`, { itemId, size }, { headers: { token } })
+            axios.post(`${backendUrl}/api/cart/add`, { itemId, size },  {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+             })
                 .catch(error => {
                     console.log(error);
                     // toast.error(error.message);
@@ -87,7 +91,11 @@ const ShopContextProvider = (props) => {
         setCartItems(cartData);
 
         if (token) {
-            axios.post(`${backendUrl}/api/cart/update`, { itemId, size, quantity }, { headers: { token } })
+            axios.post(`${backendUrl}/api/cart/update`, { itemId, size, quantity }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
                 .catch(error => {
                     console.log(error);
                     // toast.error(error.message);
@@ -130,7 +138,11 @@ const ShopContextProvider = (props) => {
     };
 
     const getUserCart = (token) => {
-        axios.post(`${backendUrl}/api/cart/get`, {}, { headers: { token } })
+        axios.post(`${backendUrl}/api/cart/get`, {}, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
             .then(response => {
                 if (response.data.success) {
                     setCartItems(response.data.cartData);
