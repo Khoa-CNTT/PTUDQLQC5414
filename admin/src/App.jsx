@@ -10,6 +10,7 @@ import AddCategories from './page/category/AddCategories'
 import AllCategories from './page/category/AllCategories'
 import UpdateCategory from './page/category/UpdateCategory'
 import AllOrders from './page/order/AllOrders'
+import RevenueCharts from './page/stats/RevenueCharts'
 
 export const backendUrl = import.meta.env.VITE_BACKEND_URL
 export const currency = '$'
@@ -32,6 +33,7 @@ const App = () => {
               <Sidebar />
               <div className='w-[70%] mx-auto ml-[max(5vw,25px)] my-8 text-gray-600 text-base'>
                 <Routes>
+                  <Route path='/admin-revenue' element={<RevenueCharts token={token} />} />
                   {/* product */}
                   <Route path='/admin-add' element={<AddItems token={token} />} />
                   <Route path='/admin-list' element={<AllListItems token={token} />} />
