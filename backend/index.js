@@ -9,7 +9,7 @@ import cartRouter from './routes/cartRoute.js';
 import orderRouter from './routes/orderRoute.js';
 import reviewRouter from './routes/reviewRoute.js';
 import categoryRouter from './routes/category.js';
-
+import statsRouter from './routes/statsRoute.js';
 const app = express();
 const port = process.env.PORT || 4000;
 connectDB();
@@ -18,6 +18,9 @@ connectCloudinary();
 app.use(express.json());
 app.use(cors());
 
+//
+app.use('/api/stats', statsRouter);
+//
 app.use('/api/user', userRouter);
 app.use('/api/product', productRouter);
 app.use('/api/cart', cartRouter);
@@ -26,7 +29,7 @@ app.use('/api/order', orderRouter);
 app.use("/api/reviews", reviewRouter);
 //
 app.use('/api/category', categoryRouter)
-
+//
 
 
 app.get('/', (req, res) => {
