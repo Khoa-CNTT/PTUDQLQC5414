@@ -17,8 +17,10 @@ import a_cup from './a-cup.jpg'
 import about from './about_uss.jpg'
 import back_coffe3 from './back-coffee-3.jpg'
 import back_coffe4 from './back-coffee-4.jpg'
+import order_img from './order_user-image.png'
 
 export const assets = {
+    order_img,
     back_coffe3,
     back_coffe4,
     cart_icon,

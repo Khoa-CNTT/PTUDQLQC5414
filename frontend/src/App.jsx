@@ -15,6 +15,10 @@ import Checkout from "./page/Checkout";
 import Verify from "./page/Verify";
 import About from "./page/About";
 import Contact from "./page/Contact";
+import Order from "./page/Order";
+
+export const backendUrl = import.meta.env.VITE_BACKEND_URL
+export const currency = '$'
 
 //nơi chứa các components chính và định tuyến router
 const App = () => {
@@ -44,6 +48,7 @@ const App = () => {
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/verify" element={<Verify />} />
+            <Route path="/orders" element={<Order />} />
           </Routes>
         </>
       </div>
