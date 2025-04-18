@@ -11,6 +11,7 @@ import AllCategories from './page/category/AllCategories'
 import UpdateCategory from './page/category/UpdateCategory'
 import AllOrders from './page/order/AllOrders'
 import RevenueCharts from './page/stats/RevenueCharts'
+import AllReviewItems from './page/review/AllReviewItems'
 
 export const backendUrl = import.meta.env.VITE_BACKEND_URL
 export const currency = '$'
@@ -46,6 +47,8 @@ const App = () => {
 
                   {/* order */}
                   <Route path="/admin-order" element={<AllOrders token={token} />} />
+
+                  <Route path="/admin-review" element={<AllReviewItems token={token} />} />
                 </Routes>
               </div>
             </div>
