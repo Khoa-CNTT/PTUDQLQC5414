@@ -1,5 +1,6 @@
 import { v2 as cloudinary } from "cloudinary"
 import productModel from "../models/productModel.js"
+import reviewModel from "../models/reviewModel.js";
 
 
 const addProduct = async (req, res) => {
@@ -100,6 +101,24 @@ const listProduct = async (req, res) => {
     }
 }
 
+const listReview = async (req, res) => {
+    try {
+        const products = await reviewModel.find({});
+        res.json({ success: true, products })
+    } catch (err) {
+        console.eror(err);
+        res.json({ success: false, message: err.message })
+    }
+}
+
+const removeReview = async (req, res) => {
+    try {
+        await reviewModel.deleteOne({ _id: req.body._id })
+        res.json({ success: true, message: "Review deleted successfully" })
+    } catch (err) {
+
+    }
+}
 const singleProduct = async (req, res) => {
     try {
         const { productId } = req.body
@@ -110,4 +129,4 @@ const singleProduct = async (req, res) => {
         res.json({ success: false, message: err.message })
     }
 }
-export { addProduct, removeProduct, listProduct, singleProduct, getUpdateId, putUpdateId }
+export { addProduct, removeProduct, listProduct,listReview,removeReview, singleProduct, getUpdateId, putUpdateId }
