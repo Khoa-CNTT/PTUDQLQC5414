@@ -115,6 +115,17 @@ const verifyPaypal = async (req, res) => {
     }
 };
 
+//user
+const ordersPeronal = async (req, res) => {
+    const userId = req.user._id;
+    try {
+        const orders = await orderModel.find({ userId }).sort({ date: -1 });
+        res.json({ success: true, orders });
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+};
 
 //admin
 const allOrders = async (req, res) => {
@@ -138,4 +149,4 @@ const updateStatus = async (req, res) => {
     }
 };
 
-export { checkoutOrder, checkoutOrderPayPal, verifyPaypal, allOrders, updateStatus };
+export { checkoutOrder, checkoutOrderPayPal, verifyPaypal, ordersPeronal, allOrders, updateStatus };
