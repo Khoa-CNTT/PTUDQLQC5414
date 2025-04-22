@@ -12,13 +12,13 @@ const checkoutOrder = async (req, res) => {
         }
 
         const user_id = req.user._id; // Lấy userId từ token
-        const { items, amount, address } = req.body;
+        const { items, amount, discount, address, coupon } = req.body;
 
         const orderData = {
             userId: user_id,
             items,
             address,
-            amount,
+            amount, discount, coupon,
             paymentMethod: 'COD',
             payment: false,
             date: Date.now()
@@ -46,14 +46,14 @@ const checkoutOrderPayPal = async (req, res) => {
         }
 
         const user_id = req.user._id; // Lấy userId từ token
-        const { items, amount, address } = req.body;
+        const { items, amount, address, discount, coupon } = req.body;
         const { origin } = req.headers;
 
         const orderData = {
             userId: user_id,
             items,
             address,
-            amount,
+            amount, discount, coupon,
             paymentMethod: 'PayPal',
             payment: false,
             date: Date.now()

@@ -13,6 +13,8 @@ const ShopContextProvider = (props) => {
     const [showSearch, setShowSearch] = useState(false);
     const [cartItems, setCartItems] = useState({});
     const [products, setProducts] = useState([]);
+    const [discount, setDiscount] = useState(0);
+    const [coupon, setCoupon] = useState(null);
     const [name, setName] = useState([]);
     const [token, setToken] = useState('');
     const navigate = useNavigate();
@@ -56,11 +58,11 @@ const ShopContextProvider = (props) => {
         setCartItems(cartData);
 
         if (token) {
-            axios.post(`${backendUrl}/api/cart/add`, { itemId, size },  {
+            axios.post(`${backendUrl}/api/cart/add`, { itemId, size }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
-             })
+            })
                 .catch(error => {
                     console.log(error);
                     // toast.error(error.message);
@@ -117,6 +119,7 @@ const ShopContextProvider = (props) => {
                 }
             }
         }
+
         return totalAmount;
     };
 
@@ -173,12 +176,16 @@ const ShopContextProvider = (props) => {
         setSearch,
         showSearch,
         setShowSearch,
+        discount,
+        setDiscount,
         cartItems,
         addToCart,
         setCartItems,
         getCartCount,
         updateQuantity,
         getCartAmount,
+        coupon,
+        setCoupon,
         navigate,
         backendUrl,
         login,
