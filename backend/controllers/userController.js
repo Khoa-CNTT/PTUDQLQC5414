@@ -220,5 +220,82 @@ const putProfileUser = (req, res) => {
             res.status(500).json({ error: 'Internal server error' });
         });
 };
+const getAccount = async (req, res) => {
+    try {
+        const users = await userModel.find({});
+        res.json({ success: true, users })
+    } catch (err) {
+        console.eror(err);
+        res.json({ success: false, message: err.message })
+    }
+}
 
-export { loginUser, registerUser, adminLogin, forgotPassword, resetPassword, getProfileUser, putProfileUser };
+const addAccount = async (req, res) => {
+    try {
+        const { name, email, password, phonenumber, address, city, country } = req.body;
+
+        // Kiểm tra tài khoản đã tồn tại chưa
+        const exists = await userModel.findOne({ email });
+        if (exists) return res.json({ success: false, message: "Email đã tồn tại" });
+
+        const newUser = new userModel({
+            name,
+            email,
+            password,
+            phonenumber,
+            address,
+            city,
+            country,
+        });
+
+        await newUser.save();
+
+        res.json({ success: true, message: "Tài khoản đã được thêm thành công" });
+    } catch (err) {
+        res.json({ success: false, message: err.message });
+    }
+};
+
+const getUpdateAccountId = async (req, res) => {
+    try {
+        const accountId = req.params.id;
+
+        // Tìm sản phẩm theo ID
+        const account = await userModel.findById(accountId); // ID thử nghiệm
+
+
+        if (!account) {
+            return res.status(404).json({ message: 'Không tìm thấy sản phẩm.' });
+        }
+
+        // Trả về thông tin sản phẩm nếu tìm thấy
+        res.status(200).json(account);
+
+    } catch (error) {
+        console.error("Lỗi khi lấy sản phẩm:", error);
+        res.status(500).json({ message: 'Lỗi server: ' + error.message });
+    }
+};
+
+//PUT
+const putUpdateAccountId = async (req, res) => {
+    try {
+        await userModel.updateOne({ _id: req.params.id }, req.body);
+        res.status(200).json({ success: true });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+};
+
+
+const removeAccount = async (req, res) => {
+    try {
+        await userModel.deleteOne({ _id: req.body._id })
+        res.json({ success: true, message: "account deleted successfully" })
+    } catch (err) {
+
+    }
+}
+
+export { loginUser, registerUser, adminLogin, forgotPassword, resetPassword, getProfileUser, putProfileUser, getAccount, addAccount, getUpdateAccountId, putUpdateAccountId, removeAccount };
+

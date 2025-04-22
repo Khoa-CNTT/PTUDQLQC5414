@@ -12,6 +12,9 @@ import UpdateCategory from './page/category/UpdateCategory'
 import AllOrders from './page/order/AllOrders'
 import RevenueCharts from './page/stats/RevenueCharts'
 import AllReviewItems from './page/review/AllReviewItems'
+import AllAccount from './page/account/AllAccount'
+import UpdateAccount from './page/account/UpdateAccount'
+import AddAccount from './page/account/AddAcount'
 
 export const backendUrl = import.meta.env.VITE_BACKEND_URL
 export const currency = '$'
@@ -35,6 +38,10 @@ const App = () => {
               <div className='w-[70%] mx-auto ml-[max(5vw,25px)] my-8 text-gray-600 text-base'>
                 <Routes>
                   <Route path='/admin-revenue' element={<RevenueCharts token={token} />} />
+                  {/* //Account */}
+                  <Route path='/admin-add-account' element={<AddAccount token={token} />} />
+                  <Route path='/admin-account' element={<AllAccount token={token} />} />
+                  <Route path="/admin-account/update/:id/edit" element={<UpdateAccount token={token} />} />
                   {/* product */}
                   <Route path='/admin-add' element={<AddItems token={token} />} />
                   <Route path='/admin-list' element={<AllListItems token={token} />} />
