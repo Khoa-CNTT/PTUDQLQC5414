@@ -15,6 +15,9 @@ import AllReviewItems from './page/review/AllReviewItems'
 import AllAccount from './page/account/AllAccount'
 import UpdateAccount from './page/account/UpdateAccount'
 import AddAccount from './page/account/AddAcount'
+import AllCoupons from './page/coupon/AllCoupons'
+import UpdateCoupon from './page/coupon/UpdateCoupon'
+import AddCoupon from './page/coupon/AddCoupon'
 
 export const backendUrl = import.meta.env.VITE_BACKEND_URL
 export const currency = '$'
@@ -56,6 +59,11 @@ const App = () => {
                   <Route path="/admin-order" element={<AllOrders token={token} />} />
 
                   <Route path="/admin-review" element={<AllReviewItems token={token} />} />
+
+                  {/* coupon */}
+                  <Route path='/admin-add-coupon' element={<AddCoupon token={token} />} />
+                  <Route path="/admin-coupon" element={<AllCoupons token={token} />} />
+                  <Route path="/admin-coupon/update/:id/edit" element={<UpdateCoupon token={token} />} />
                 </Routes>
               </div>
             </div>

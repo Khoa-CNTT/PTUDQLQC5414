@@ -5,8 +5,8 @@ const couponSchema = new mongoose.Schema({
     type: { type: String, enum: ['percentage', 'fixed'], required: true }, // percentage: giảm %, fixed: giảm số tiền
     value: { type: Number, required: true }, // % hoặc số tiền
     minOrder: { type: Number, default: 0 }, // đơn hàng tối thiểu
-    startDate: { type: Date, required: true },
-    endDate: { type: Date, required: true },
+    startDate: { type: Date, default: Date.now },
+    endDate: { type: Date, default: () => new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) }, // mặc định +7 ngày    
     isActive: { type: Boolean, default: true }
 });
 

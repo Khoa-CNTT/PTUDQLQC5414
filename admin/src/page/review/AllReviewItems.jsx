@@ -75,7 +75,7 @@ const AllReviewItem = ({ token }) => {
             <p className='min-w-[80px]'>{item.username}</p>
             <p className='min-w-[70px]'>{item.rating}</p>
             <p className='min-w-[70px]'>{item.comment}</p>
-            <p className='min-w-[60px]'>{item.date}</p>
+            <p>{new Date(item.date).toLocaleDateString()}</p>
             <p
               onClick={() => removeProduct(item._id)}
               className='text-right md:text-center cursor-pointer text-lg text-red-500'

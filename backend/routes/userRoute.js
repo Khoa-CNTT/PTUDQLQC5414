@@ -13,10 +13,14 @@ userRouter.post('/reset-password', resetPassword);
 userRouter.get('/profile', authUser, getProfileUser);
 userRouter.put('/profile', authUser, putProfileUser);
 //admin
+//get
 userRouter.get('/account', adminAuth, getAccount);
+//post
 userRouter.post('/add', adminAuth, addAccount);
+//put
 userRouter.get('/update/:id/edit', adminAuth, getUpdateAccountId);
 userRouter.put('/update/:id', adminAuth, putUpdateAccountId);
+//delete
 userRouter.delete('/remove', adminAuth, removeAccount);
 
 export default userRouter;
