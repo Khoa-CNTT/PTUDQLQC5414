@@ -17,11 +17,24 @@ const CartTotal = () => {
     } = useContext(ShopContext);
 
     const [couponCode, setCouponCode] = useState('');
+    const [couponList, setCouponList] = useState([]);
     const [message, setMessage] = useState('');
 
     useEffect(() => {
-        // TU DONG RESET DISCOUNT VE 0 KHI DA MUA XONG
-        setDiscount('')
+        const fetchCoupons = async () => {
+            try {
+                const response = await axios.get(`${backendUrl}/api/coupon/list`);
+                if (response.data.success) {
+                    setCouponList(response.data.coupons);
+                }
+            } catch (error) {
+                console.error("Error fetching coupons", error);
+            }
+        };
+        fetchCoupons();
+
+        // Tự động reset discount về 0 khi đã mua xong
+        setDiscount(0);
     }, []);
 
     const subtotal = getCartAmount();
@@ -30,6 +43,11 @@ const CartTotal = () => {
         : 0;
 
     const handleApplyCoupon = async () => {
+        if (!couponCode) {
+            setMessage('Please choose coupon code!');
+            return;
+        }
+
         try {
             const res = await axios.post(
                 `${backendUrl}/api/coupon/apply`,
@@ -50,7 +68,7 @@ const CartTotal = () => {
                 discount: discountValue
             });
 
-            setMessage(`Apply success, discount ${currency}${discountValue.toFixed(2)}`);
+            setMessage(`Apply success coupon, discount ${currency}${discountValue.toFixed(2)}`);
         } catch (err) {
             setDiscount(0);
             setCoupon({ applied: false });
@@ -88,13 +106,19 @@ const CartTotal = () => {
                 </div>
 
                 <div className="mt-4">
-                    <input
-                        type="text"
+                    <select
                         value={couponCode}
                         onChange={(e) => setCouponCode(e.target.value)}
-                        placeholder="Fill the promote code"
                         className="w-full px-3 py-2 rounded text-black"
-                    />
+                    >
+                        <option value="">-- Choose coupon code --</option>
+                        {couponList.map((coupon, index) => (
+                            <option key={index} value={coupon.code}>
+                                {coupon.code} - {coupon.type === 'percentage' ? `${coupon.value}%` : `${currency}${coupon.value}`}
+                            </option>
+                        ))}
+                    </select>
+
                     <button
                         type="button"
                         onClick={handleApplyCoupon}
