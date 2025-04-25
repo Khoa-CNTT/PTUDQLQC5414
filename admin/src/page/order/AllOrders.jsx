@@ -103,7 +103,7 @@ const AllOrders = ({ token }) => {
                                     {order.payment ? 'Done' : 'Loading'}
                                 </span>
                             </p>
-                            <p>📅 Date: {new Date(order.date).toLocaleDateString()}</p>
+                            <p>Date: {new Date(order.date).toLocaleDateString()}</p>
                         </div>
 
                         {/* Total */}
