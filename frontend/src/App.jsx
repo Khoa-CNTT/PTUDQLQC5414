@@ -5,7 +5,6 @@ import Product from "./page/Product";
 import NavBar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { assets } from "./assets/assets";
-import SearchBar from "./components/SearchBar";
 import Compilation from "./page/Compilation";
 import Login from "./page/Login";
 import ResetPassword from "./page/ResetPassword";
@@ -16,6 +15,8 @@ import Verify from "./page/Verify";
 import About from "./page/About";
 import Contact from "./page/Contact";
 import Order from "./page/Order";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const backendUrl = import.meta.env.VITE_BACKEND_URL
 export const currency = '$'
@@ -32,8 +33,8 @@ const App = () => {
           backgroundPosition: "center center",
         }}
       >
+        <ToastContainer position="top-right" autoClose={3000} />
         <NavBar />
-        <SearchBar />
         <>
           <Routes>
             <Route path="/" element={<Home />} />

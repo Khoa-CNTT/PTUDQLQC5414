@@ -18,6 +18,8 @@ import AddAccount from './page/account/AddAcount'
 import AllCoupons from './page/coupon/AllCoupons'
 import UpdateCoupon from './page/coupon/UpdateCoupon'
 import AddCoupon from './page/coupon/AddCoupon'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const backendUrl = import.meta.env.VITE_BACKEND_URL
 export const currency = '$'
@@ -31,6 +33,7 @@ const App = () => {
 
   return (
     <div className='bg-gray-50 min-h-screen'>
+      <ToastContainer position="top-right" autoClose={3000} />
       {token === "" ?
         <Login setToken={setToken} /> : <>
           <div className='ml-10 mr-10'>

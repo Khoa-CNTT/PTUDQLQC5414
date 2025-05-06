@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { assets } from '../../assets_admin/assets';
 import axios from 'axios'
 import { backendUrl } from '../../App'
+import { toast } from 'react-toastify';
 
 const AddItems = ({ token }) => {
   const [image1, setImage1] = useState(false)
@@ -71,6 +72,8 @@ const AddItems = ({ token }) => {
         setCategory('');
         setSubCategories([]);
         setBestseller(false);
+        //
+        toast.success('Success Add Item!');
       }
 
     } catch (error) {

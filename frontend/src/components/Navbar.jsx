@@ -4,19 +4,20 @@ import { Link, NavLink } from 'react-router-dom';
 import { ShopContext } from '../context/ShopContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMugHot } from '@fortawesome/free-solid-svg-icons';
+import { toast } from 'react-toastify';
 
 //thanh trên cùng bao gồm các navlink chuyển trang ,...
 const NavBar = () => {
     const [visible, setVisible] = useState(false);
     const {
-        setShowSearch,
-        getCartCount,
+        setShowSearch, //set true hiển thị search
+        getCartCount, //hiển thị Count trên cart Navbar
         navigate,
         token,
         logout,
         name,
         setName,
-        setCartItems
+        setCartItems // logout cho cartItem rỗng {}
     } = useContext(ShopContext);
 
     //
@@ -35,6 +36,8 @@ const NavBar = () => {
         //logout remove Token
         logout()
         setCartItems({});
+        //
+        toast.success('Success Logout!');
     };
 
     return (
@@ -119,34 +122,21 @@ const NavBar = () => {
                 </div>
 
                 <Link to='/cart' className='relative'>
-                    <img
-                        src={assets.cart_icon}
-                        alt=''
-                        className='w-5 min-w-5'
-                        style={{ filter: 'invert(1)' }} //chỉnh lại màu sắc cho img cho trường hợp ko dùng text-white cho font-awesome
-                    />
+                    <img src={assets.cart_icon} alt='' className='w-5 min-w-5' style={{ filter: 'invert(1)' }} />
                     <p className='absolute right-[-5px] top-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]'>
                         {getCartCount()}
                     </p>
                 </Link>
-                <img
-                    onClick={() => setVisible(true)}
-                    src={assets.menu_icon}
-                    alt=''
-                    className='w-5 cursor-pointer sm:hidden'
+
+                <img onClick={() => setVisible(true)} src={assets.menu_icon} alt='' className='w-5 cursor-pointer sm:hidden'
                     style={{ filter: 'invert(1)' }}
                 />
             </div>
 
-            <div
-                className={`absolute top-0 right-0 bottom-0 overflow-hidden bg-white z-10 translate-all ${visible ? 'w-full' : 'w-0'
-                    }`}
-            >
+            {/* hien thi tren mobile */}
+            <div className={`absolute top-0 right-0 bottom-0 overflow-hidden bg-white z-10 translate-all ${visible ? 'w-6/12' : 'w-0'}`}>
                 <div className='flex flex-col text-gray-600'>
-                    <div
-                        onClick={() => setVisible(false)}
-                        className='flex items-center gap-4 p-3 cursor-pointer'
-                    >
+                    <div onClick={() => setVisible(false)} className='flex items-center gap-4 p-3 cursor-pointer'>
                         <img
                             src={assets.dropdown_icon}
                             alt=''

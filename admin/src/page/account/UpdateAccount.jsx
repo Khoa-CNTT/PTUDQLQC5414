@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { ShopContext } from '../../../../frontend/src/context/ShopContext';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function UpdateAccount({ token }) {
     const { id } = useParams();
@@ -48,7 +48,8 @@ function UpdateAccount({ token }) {
             }
         })
             .then(() => {
-                alert('Cập nhật thành công!');
+                //
+                toast.success('Success Update Account!');
             })
             .catch(err => console.error(err));
     };

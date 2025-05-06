@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { backendUrl } from '../../App';
+import { toast } from 'react-toastify';
 
 const AddAccount = ({ token }) => {
   const [name, setName] = useState("");
@@ -30,7 +31,6 @@ const AddAccount = ({ token }) => {
       });
 
       if (response.data.success) {
-        alert("success!");
         setName('');
         setEmail('');
         setPassword('');
@@ -38,6 +38,8 @@ const AddAccount = ({ token }) => {
         setAddress('');
         setCity('');
         setCountry('');
+        //
+        toast.success('Success Add Account!');
       }
 
     } catch (error) {
@@ -84,7 +86,7 @@ const AddAccount = ({ token }) => {
           <input onChange={(e) => setCountry(e.target.value)} value={country} type='text' placeholder='Country' className='w-full max-w-[500px] px-3 py-2' />
         </div>
 
-        <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded'>Thêm tài khoản</button>
+        <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded'>Add Account</button>
       </form>
     </div>
   );

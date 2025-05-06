@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { backendUrl } from '../../App'
+import { toast } from 'react-toastify';
 
 const AllCoupons = ({ token }) => {
   const [coupons, setCoupons] = useState([])
@@ -29,11 +30,13 @@ const AllCoupons = ({ token }) => {
       })
       if (response.data.success) {
         await fetchCoupons()
+        //
+        toast.success('Success Delete Coupon!');
       } else {
         console.log('Xoá thất bại')
       }
     } catch (error) {
-      console.error('Lỗi khi xoá coupon:', error)
+      toast.error(error);
     }
   }
 

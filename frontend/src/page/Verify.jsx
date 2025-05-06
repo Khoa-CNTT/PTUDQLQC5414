@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { ShopContext } from '../context/ShopContext'
 import { useSearchParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import axios from 'axios'
 
 const Verify = () => {
@@ -20,7 +21,9 @@ const Verify = () => {
             )
             if (response.data.success) {
                 setCartItems({})
+                //
                 navigate('/orders')
+                toast.success('Success Order!');
             } else {
                 navigate('/cart')
             }

@@ -8,7 +8,7 @@ const Product = () => {
   const { productId } = useParams();  // Lấy productId từ URL
   const { products, currency, addToCart } = useContext(ShopContext);
 
-  const [productData, setProductData] = useState(null);  // Sản phẩm hiện tại
+  const [productData, setProductData] = useState();  // Sản phẩm hiện tại
   const [image, setImage] = useState("");  // Hình ảnh sản phẩm
   const [size, setSize] = useState("");  // Kích thước sản phẩm đã chọn
   const [loading, setLoading] = useState(true);  // Trạng thái loading
@@ -26,10 +26,6 @@ const Product = () => {
 
   if (loading) {
     return <div>Đang tải...</div>;  // Hiển thị khi đang tải dữ liệu
-  }
-
-  if (!productData) {
-    return <div>Sản phẩm không tồn tại.</div>;  // Hiển thị nếu không tìm thấy sản phẩm
   }
 
   return (
@@ -89,7 +85,7 @@ const Product = () => {
           <hr className="mt-8 sm:w-4/5" />
 
           <div className="text-sm text-gray-700 mt-5 flex flex-col gap-1">
-            <p>✅ The product is 100% genuine and sourced from official suppliers.<br />💳 Cash on delivery is available for this item.</p>
+            <p>- The product is 100% genuine and sourced from official suppliers.<br />- Cash on delivery is available for this item.</p>
           </div>
         </div>
       </div>

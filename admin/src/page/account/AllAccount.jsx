@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { backendUrl } from '../../App'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
 const AllAccount = ({ token }) => {
 
@@ -41,6 +42,8 @@ const AllAccount = ({ token }) => {
       if (response.data.success) {
         //
         await fetchList();
+        //
+        toast.success('Success Delete Account!');
       } else {
         //
       }

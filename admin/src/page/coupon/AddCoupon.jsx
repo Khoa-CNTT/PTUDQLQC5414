@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { backendUrl } from '../../App';
+import { toast } from 'react-toastify';
 
 const AddCoupon = ({ token }) => {
     const [code, setCode] = useState('');
@@ -30,10 +31,11 @@ const AddCoupon = ({ token }) => {
                 setType('percentage');
                 setValue('');
                 setMinOrder('');
-                alert("Coupon added successfully!");
+                //
+                toast.success('Success Add Coupon!');
             }
         } catch (error) {
-            console.error('Error adding coupon:', error);
+            toast.error(error);
         }
     };
 

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { backendUrl } from '../../App'
+import { toast } from 'react-toastify';
 
 const AddCategories = ({ token }) => {
     const [name, setName] = useState('');
     const [subCategories, setSubCategories] = useState(['']);
-    const [message, setMessage] = useState('');
 
     const handleSubCategoryChange = (index, value) => {
         const newSubCategories = [...subCategories];
@@ -36,23 +36,21 @@ const AddCategories = ({ token }) => {
             });
 
             if (response.data.success) {
-                setMessage('Category added successfully!');
                 setName('');
                 setSubCategories(['']);
+                //
+                toast.success('Success Add Category!');
             } else {
-                setMessage('Failed to add category');
+                toast.error(err);
             }
-        } catch (error) {
-            console.error('Error adding category:', error);
-            setMessage('Error occurred while adding category');
+        } catch (err) {
+            toast.error(err);
         }
     };
 
     return (
         <form onSubmit={handleSubmit} className='flex flex-col gap-4 max-w-md'>
             <h2 className='text-lg font-bold'>Add New Category</h2>
-
-            {message && <p className='text-sm text-green-600'>{message}</p>}
 
             <div>
                 <label className='block mb-1'>Category Name</label>

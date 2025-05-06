@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { ShopContext } from "../context/ShopContext"; // Đảm bảo context này chứa `name` và `setName`
+import { toast } from 'react-toastify';
 
 const ReviewPage = ({ productId }) => {
     const [reviews, setReviews] = useState([]);
@@ -41,6 +42,10 @@ const ReviewPage = ({ productId }) => {
 
             // Reset form
             setNewReview({ username: "", rating: 5, comment: "" });
+
+            //
+            toast.success('Success Review!');
+
         } catch (err) {
             console.error("Lỗi khi gửi đánh giá:", err);
         }
@@ -53,7 +58,7 @@ const ReviewPage = ({ productId }) => {
             {/* Hiển thị tổng số đánh giá */}
             <div className="mb-4">
                 <p className="text-sm text-gray-600">
-                    {reviews.length} review{reviews.length !== 1 ? 's' : ''} so far
+                    {reviews.length} review{reviews.length !== 0 && 1 ? 's' : ''} so far
                 </p>
             </div>
 
@@ -84,9 +89,9 @@ const ReviewPage = ({ productId }) => {
                     }
                     className="border p-2 w-full"
                 >
-                    {[5, 4, 3, 2, 1].map((s) => (
-                        <option key={s} value={s}>
-                            {s} stars
+                    {[5, 4, 3, 2, 1].map((number) => (
+                        <option key={number} value={number}>
+                            {number} stars
                         </option>
                     ))}
                 </select>
