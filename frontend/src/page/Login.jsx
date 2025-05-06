@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
+import { toast } from 'react-toastify';
 import { ShopContext } from '../context/ShopContext';
 import axios from 'axios';
-import { toast } from 'react-toastify';
 
 const Login = () => {
     const [currentState, setCurrentState] = useState('Login');
@@ -33,7 +33,9 @@ const Login = () => {
                 if (response.data.success) {
                     if (currentState === 'Login') {
                         //setToken khi login
-                        login(response.data.token,response.data.name);
+                        toast.success('Success Login!');
+                        login(response.data.token, response.data.name);
+
                         //
                     } else if (currentState === 'Forgot Password') {
                         setMessage("A reset link has been sent to your email.");

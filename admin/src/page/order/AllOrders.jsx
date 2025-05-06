@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { backendUrl, currency } from '../../App';
 import { assets } from '../../assets_admin/assets';
+import { toast } from 'react-toastify';
 
 const AllOrders = ({ token }) => {
     const [orders, setOrders] = useState([]);
@@ -39,9 +40,11 @@ const AllOrders = ({ token }) => {
             );
             if (response.data.success) {
                 await fetchAllOrders();
+                //
+                toast.success('Success Update Status!');
             }
         } catch (error) {
-            console.log(error);
+            error.log(error);
             //
         }
     };

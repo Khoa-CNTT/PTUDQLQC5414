@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { backendUrl } from '../../App';
-import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const AllReviewItem = ({ token }) => {
   const [listItems, setListItems] = useState([]);
@@ -33,6 +33,7 @@ const AllReviewItem = ({ token }) => {
       );
 
       setListItems(withSentiment);
+
     } catch (error) {
       console.error('Error fetching reviews or analyzing sentiment:', error);
     }
@@ -47,6 +48,8 @@ const AllReviewItem = ({ token }) => {
       });
       if (resp.data.success) {
         await fetchList();
+        //
+        toast.success('Success Delete Review!');
       }
     } catch (error) {
       console.error(error);

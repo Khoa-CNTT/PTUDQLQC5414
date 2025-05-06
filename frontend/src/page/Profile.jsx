@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useState } from 'react';
 import { ShopContext } from '../context/ShopContext';
 import axios from 'axios';
 import { assets } from '../assets/assets';
+import { toast } from 'react-toastify';
 
 function Profile() {
     const [name, setName] = useState('');
@@ -65,6 +66,8 @@ function Profile() {
                 setAddress(address || '');
                 setCity(city || '');
                 setCountry(country || '');
+                //
+                toast.success('Success Save!');
             })
             .catch(error => {
                 console.error('Error updating profile:', error);
@@ -138,7 +141,7 @@ function Profile() {
                             type="submit"
                             className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition"
                         >
-                            Lưu
+                            Save
                         </button>
                     </div>
                 </form>

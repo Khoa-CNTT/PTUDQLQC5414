@@ -37,6 +37,7 @@ const ShopContextProvider = (props) => {
         navigate('/login');
     };
 
+    //add vào cart
     const addToCart = (itemId, size) => {
         if (!size) {
             // toast.error('Select Product Size');
@@ -44,15 +45,16 @@ const ShopContextProvider = (props) => {
             return;
         }
 
-        let cartData = structuredClone(cartItems);
-        if (cartData[itemId]) {
-            if (cartData[itemId][size]) {
-                cartData[itemId][size] += 1;
+        let cartData = structuredClone(cartItems); //Tạo bản sao deep copy để tránh thay đổi trực tiếp state cũ 
+
+        if (cartData[itemId]) { //KTRA San pham co trong Cart chua
+            if (cartData[itemId][size]) {//KTRA SIZE
+                cartData[itemId][size] += 1; // +1
             } else {
-                cartData[itemId][size] = 1;
+                cartData[itemId][size] = 1; // tao size =1
             }
         } else {
-            cartData[itemId] = { [size]: 1 };
+            cartData[itemId] = { [size]: 1 }; // Tao san pham Cart
         }
 
         setCartItems(cartData);
@@ -66,15 +68,15 @@ const ShopContextProvider = (props) => {
                 .catch(error => {
                     console.log(error);
                     // toast.error(error.message);
-                    alert(error.message);
                 });
         }
     };
 
+    //hiển thị Count trên cart Navbar
     const getCartCount = () => {
         let totalCount = 0;
-        for (const items in cartItems) {
-            for (const item in cartItems[items]) {
+        for (const items in cartItems) { //items là key cấp 1 của cartItems
+            for (const item in cartItems[items]) { //Duyệt qua từng item con trong mỗi nhóm
                 try {
                     if (cartItems[items][item] > 0) {
                         totalCount += cartItems[items][item];
@@ -123,6 +125,7 @@ const ShopContextProvider = (props) => {
         return totalAmount;
     };
 
+    //get ProductList
     const getProductsData = () => {
         axios.get(`${backendUrl}/api/product/list`)
             .then(response => {

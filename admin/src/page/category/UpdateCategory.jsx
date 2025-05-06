@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { backendUrl } from '../../App';
+import { toast } from 'react-toastify';
 
 const UpdateCategory = ({ token }) => {
     const { id } = useParams();
@@ -49,11 +50,11 @@ const UpdateCategory = ({ token }) => {
                     Authorization: `Bearer ${token}`,
                 },
             });
-
-            alert("Category updated successfully!");
+            //
             navigate('/admin-category');
+            toast.success('Success Update Category!');
         } catch (err) {
-            console.error(err);
+            toast.error(err);
         }
     };
 

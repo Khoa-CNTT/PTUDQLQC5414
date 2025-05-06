@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { backendUrl } from '../../App'
+import { toast } from 'react-toastify';
 
 const AllCategories = ({ token }) => {
   const [categories, setCategories] = useState([])
@@ -30,9 +31,11 @@ const AllCategories = ({ token }) => {
 
       if (response.data.success) {
         await fetchCategories()
+        //
+        toast.success('Success Delete Category!');
       }
-    } catch (error) {
-      console.log(error)
+    } catch (err) {
+      toast.error(err);
     }
   }
 

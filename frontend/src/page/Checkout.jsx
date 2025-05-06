@@ -3,6 +3,7 @@ import CartTotal from '../components/CartTotal';
 import Label from '../components/Label';
 import { assets } from '../assets/assets';
 import { ShopContext } from '../context/ShopContext';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 const Checkout = () => {
@@ -78,9 +79,10 @@ const Checkout = () => {
                     );
                     if (response.data.success) {
                         setCoupon(response.data.coupon);
-                        navigate('/orders');
                         setCartItems({});
-                        alert('Đặt hàng thành công');
+                        //
+                        navigate('/orders');
+                        toast.success('Success Order!');
                     } else {
                         alert('Có lỗi xảy ra trong quá trình tạo đơn hàng.');
                     }

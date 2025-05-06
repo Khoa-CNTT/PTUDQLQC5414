@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { backendUrl, currency } from '../../App'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
 const AllListItems = ({ token }) => {
 
@@ -37,6 +38,8 @@ const AllListItems = ({ token }) => {
       if (response.data.success) {
         //
         await fetchList();
+        //
+        toast.success('Success Delete Item!');
       } else {
         //
       }

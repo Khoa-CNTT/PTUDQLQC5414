@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function UpdateCoupon({ token }) {
     const { id } = useParams();
@@ -39,8 +40,11 @@ function UpdateCoupon({ token }) {
                 Authorization: `Bearer ${token}`
             }
         }).then(() => {
-            alert('Cập nhật mã giảm giá thành công!');
-        }).catch(err => console.error(err));
+            //
+            toast.success('Success Update Coupon!');
+        }).catch(err =>
+            toast.err(err)
+        );
     };
 
     return (

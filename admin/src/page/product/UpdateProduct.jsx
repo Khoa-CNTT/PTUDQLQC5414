@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { ShopContext } from '../../../../frontend/src/context/ShopContext';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function UpdateProduct({ token }) {
     const { id } = useParams();
@@ -79,7 +79,8 @@ function UpdateProduct({ token }) {
             }
         })
             .then(() => {
-                alert('Cập nhật sản phẩm thành công!');
+                //
+                toast.success('Success Update Product!');
             })
             .catch(err => console.error(err));
     };
