@@ -17,6 +17,13 @@ const Sidebar = () => {
 
                 <hr className='border-gray-300' />
 
+                <NavLink to="/admin-forecast" className={({ isActive }) => `${navItemStyle} ${isActive ? activeStyle : ''}`}>
+                    <img src={assets.forecast} alt='' className='w-5 h-5' />
+                    <p className='hidden md:block'>Forecast</p>
+                </NavLink>
+
+                <hr className='border-gray-300' />
+
                 <NavLink to="/admin-add-account" className={({ isActive }) => `${navItemStyle} ${isActive ? activeStyle : ''}`}>
                     <img src={assets.add_icon} alt='' className='w-5 h-5' />
                     <p className='hidden md:block'>Add Account</p>

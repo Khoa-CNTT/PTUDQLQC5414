@@ -12,6 +12,7 @@ import categoryRouter from './routes/category.js';
 import statsRouter from './routes/statsRoute.js';
 import couponRouter from './routes/couponRoute.js';
 import sentimentRouter from './routes/sentimentRoute.js';
+import forecastRouter from './routes/forecastRoute.js';
 const app = express();
 const port = process.env.PORT || 4000;
 connectDB();
@@ -35,6 +36,8 @@ app.use('/api/category', categoryRouter)
 app.use('/api/coupon', couponRouter);
 //
 app.use('/api/analyze-sentiment', sentimentRouter);
+//
+app.use('/api/forecast', forecastRouter);
 
 app.get('/', (req, res) => {
     res.send('API Working');
