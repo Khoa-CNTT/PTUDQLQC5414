@@ -5,8 +5,10 @@ import upload_img from './upload_img.png'
 import list_icon from './list_icon.png'
 import order_img from './order_img.png'
 import revenue_img from './revenue_img.png'
+import forecast from './fore-cast.png'
 
 export const assets = {
+    forecast,
     logo_admin,
     admin_manager,
     add_icon,

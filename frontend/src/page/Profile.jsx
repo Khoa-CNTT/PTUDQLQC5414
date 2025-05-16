@@ -14,7 +14,8 @@ function Profile() {
     const { token, backendUrl } = useContext(ShopContext);
 
     useEffect(() => {
-        const token = localStorage.getItem('token')
+        const token = localStorage.getItem('token');
+        //
         if (!token) {
             console.error('User is not logged in!');
         } else {
@@ -45,7 +46,9 @@ function Profile() {
     //ham Update
     const handleUpdate = (e) => {
         e.preventDefault();
+        //
         const token = localStorage.getItem('token');
+        //
         const updatedData = {
             name,
             phonenumber,

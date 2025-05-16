@@ -26,7 +26,7 @@ const registerUser = async (req, res) => {
         }
 
         // Kiểm tra password đủ mạnh
-        if (!password || password.length < 3) {
+        if (!password || password.length < 8) {
             return res.status(400).json({ success: false, message: "Password must be at least 8 characters long" });
         }
 

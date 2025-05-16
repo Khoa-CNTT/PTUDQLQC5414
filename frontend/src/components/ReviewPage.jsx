@@ -24,10 +24,10 @@ const ReviewPage = ({ productId }) => {
         e.preventDefault();
         try {
             const reviewToSubmit = {
+                productId,
                 username: name,
                 rating: newReview.rating,
                 comment: newReview.comment,
-                productId,
             };
 
             // Gửi đánh giá lên server
@@ -41,7 +41,7 @@ const ReviewPage = ({ productId }) => {
             setReviews([reviewToSubmit, ...reviews]);
 
             // Reset form
-            setNewReview({ username: "", rating: 5, comment: "" });
+            setNewReview({ rating: 5, comment: "" });
 
             //
             toast.success('Success Review!');
@@ -82,6 +82,7 @@ const ReviewPage = ({ productId }) => {
                     className="border p-2 w-full"
                 />
 
+                {/* select */}
                 <select
                     value={newReview.rating}
                     onChange={(e) =>
@@ -95,6 +96,7 @@ const ReviewPage = ({ productId }) => {
                         </option>
                     ))}
                 </select>
+                {/* select */}
 
                 <button type="submit" className="bg-black text-white px-4 py-2 rounded">
                     Submit Review

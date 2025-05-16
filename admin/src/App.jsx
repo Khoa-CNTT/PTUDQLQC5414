@@ -20,6 +20,7 @@ import UpdateCoupon from './page/coupon/UpdateCoupon'
 import AddCoupon from './page/coupon/AddCoupon'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ForecastBestSellers from './page/forecast/ForecastBestSellers'
 
 export const backendUrl = import.meta.env.VITE_BACKEND_URL
 export const currency = '$'
@@ -43,11 +44,17 @@ const App = () => {
               <Sidebar />
               <div className='w-[70%] mx-auto ml-[max(5vw,25px)] my-8 text-gray-600 text-base'>
                 <Routes>
+                  {/* //RevenueCharts */}
                   <Route path='/admin-revenue' element={<RevenueCharts token={token} />} />
+
+                  {/* //ForecastBestSellers */}
+                  <Route path='/admin-forecast' element={<ForecastBestSellers token={token} />} />
+
                   {/* //Account */}
                   <Route path='/admin-add-account' element={<AddAccount token={token} />} />
                   <Route path='/admin-account' element={<AllAccount token={token} />} />
                   <Route path="/admin-account/update/:id/edit" element={<UpdateAccount token={token} />} />
+
                   {/* product */}
                   <Route path='/admin-add' element={<AddItems token={token} />} />
                   <Route path='/admin-list' element={<AllListItems token={token} />} />

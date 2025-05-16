@@ -96,8 +96,6 @@ const Checkout = () => {
                             { headers: { Authorization: `Bearer ${token}` } }
                         );
 
-                        console.log('RESPONSE PAYPAL:', responsePaypal.data);
-
                         if (responsePaypal.data.success) {
                             const { approvalUrl } = responsePaypal.data;
                             if (approvalUrl) {

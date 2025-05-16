@@ -35,12 +35,14 @@ const Login = () => {
                         //setToken khi login
                         toast.success('Success Login!');
                         login(response.data.token, response.data.name);
-
                         //
                     } else if (currentState === 'Forgot Password') {
                         setMessage("A reset link has been sent to your email.");
-                        setCurrentState('Login');
+                        //
+                    } else if (currentState === 'Sign Up') {
+                        toast.success('Success Sign up!');
                     }
+
                 } else {
                     toast.error(response.data.message);
                 }
