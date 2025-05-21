@@ -15,7 +15,7 @@ function ForecastBestSellers() {
     return (
         <div className="bg-white rounded-xl p-5 shadow-md max-w-3xl mx-auto ">
             <h2 className="text-2xl font-bold mb-4 text-gray-800 text-center">
-                📈 Forecast of best-selling products next week
+                Forecast of best-selling products next week
             </h2>
             <h6 className='text-center'>Based on product orders from 2 weeks ago</h6>
 

@@ -103,13 +103,14 @@ const listProduct = async (req, res) => {
 
 const listReview = async (req, res) => {
     try {
-        const products = await reviewModel.find({});
-        res.json({ success: true, products })
+        const products = await reviewModel.find({}).populate('productId', 'name'); // Chỉ lấy tên sản phẩm
+        console.log(products);
+        res.json({ success: true, products });
     } catch (err) {
-        console.eror(err);
-        res.json({ success: false, message: err.message })
+        console.error(err);
+        res.json({ success: false, message: err.message });
     }
-}
+};
 
 const removeReview = async (req, res) => {
     try {
@@ -129,4 +130,4 @@ const singleProduct = async (req, res) => {
         res.json({ success: false, message: err.message })
     }
 }
-export { addProduct, removeProduct, listProduct,listReview,removeReview, singleProduct, getUpdateId, putUpdateId }
+export { addProduct, removeProduct, listProduct, listReview, removeReview, singleProduct, getUpdateId, putUpdateId }

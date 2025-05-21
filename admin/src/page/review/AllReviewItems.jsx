@@ -65,7 +65,8 @@ const AllReviewItem = ({ token }) => {
       <p className="mb-2">All Review List</p>
       <div className="flex flex-col gap-2">
         {/* Header chỉ hiển thị trên md trở lên */}
-        <div className="hidden md:grid grid-cols-[1fr_1fr_3fr_1fr_1fr_0.5fr] items-center py-1 px-2 border bg-gray-100 text-sm">
+        <div className="hidden md:grid grid-cols-[1fr_1fr_1fr_3fr_1fr_1fr_0.5fr] items-center py-1 px-2 border bg-gray-100 text-sm">
+          <b>Product</b>
           <b>Username</b>
           <b>Rating</b>
           <b>Comment</b>
@@ -77,8 +78,9 @@ const AllReviewItem = ({ token }) => {
         {listItems.map((item, index) => (
           <div
             key={item._id || index}
-            className="flex flex-wrap md:grid md:grid-cols-[1fr_1fr_3fr_1fr_1fr_0.5fr] items-center gap-2 py-1 px-2 border text-sm"
+            className="flex flex-wrap md:grid md:grid-cols-[1fr_1fr_1fr_3fr_1fr_1fr_0.5fr] items-center gap-2 py-1 px-2 border text-sm"
           >
+            <p className="min-w-[80px]">{item.productId.name}</p> {/* Hiển thị tên sản phẩm */}
             <p className="min-w-[80px]">{item.username}</p>
             <p className="min-w-[70px]">{item.rating}</p>
             <p className="min-w-[70px]">{item.comment}</p>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { backendUrl,currency } from '../App';
+import { backendUrl, currency } from '../App';
 import { assets } from '../assets/assets';
 
 const Order = () => {
@@ -47,6 +47,7 @@ const Order = () => {
                                 <p key={idx}>
                                     <span className="font-medium">{item.name}</span> x {item.quantity}{' '}
                                     <span className="italic text-gray-500">({item.size})</span>
+                                    <span className="italic text-gray-500">({item.subCategory})</span>
                                 </p>
                             ))}
                             <p className="mt-3 font-semibold text-gray-900">
@@ -67,7 +68,7 @@ const Order = () => {
                                     {order.payment ? 'Done' : 'Pending'}
                                 </span>
                             </p>
-                            <p>📅 {new Date(order.date).toLocaleDateString()}</p>
+                            <p>Date: {new Date(order.date).toLocaleDateString()}</p>
                         </div>
                         <p className="font-bold text-indigo-600 text-right">
                             {currency}{order.amount}

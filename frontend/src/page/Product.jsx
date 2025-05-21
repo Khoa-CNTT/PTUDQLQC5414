@@ -10,7 +10,10 @@ const Product = () => {
 
   const [productData, setProductData] = useState();  // Sản phẩm hiện tại
   const [image, setImage] = useState("");  // Hình ảnh sản phẩm
+  //
   const [size, setSize] = useState("");  // Kích thước sản phẩm đã chọn
+  const [subCategories, setSubcategories] = useState("");  // Kích thước sản phẩm đã chọn
+  //
   const [loading, setLoading] = useState(true);  // Trạng thái loading
   const [activeTab, setActiveTab] = useState("description"); // Tab đang được chọn (description hoặc reviews)
 
@@ -61,7 +64,7 @@ const Product = () => {
 
           {/* Chọn kích thước */}
           <div className="flex flex-col gap-4 my-8">
-            <p>Select Size</p>
+            <p className="text-base">Select Size</p>
             <div className="flex gap-2">
               {productData.sizes.map((item, index) => (
                 <button
@@ -73,11 +76,24 @@ const Product = () => {
                 </button>
               ))}
             </div>
+            {/* // */}
+            <p className="text-sm">Sub Category</p>
+            <div className="flex gap-2">
+              {productData.subCategories.map((item, index) => (
+                <button
+                  onClick={() => setSubcategories(item)}
+                  key={index}
+                  className={`border py-2 px-4 bg-gray-200 ${item === subCategories ? "border-orange-500" : ""}`}
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
           </div>
 
           <button
-            onClick={() => addToCart(productData._id, size)}
-            className="bg-white border text-black px-8 py-3 text-sm active:bg-gray-300"
+            onClick={() => addToCart(productData._id, size, subCategories)}
+            className="bg-gray-600 border text-white px-8 py-3 text-sm hover:bg-gray-400 hover:text-black"
           >
             ADD TO CART
           </button>
@@ -110,7 +126,11 @@ const Product = () => {
       <div className="mt-8">
         {activeTab === "description" ? (
           <div>
-            <p>{productData.description}</p>
+            <ul>
+              {productData.description.split("\n").map((line, index) => (
+                <li key={index}>{line}</li>
+              ))}
+            </ul>
           </div>
         ) : (
           <ReviewPage productId={productData._id} />
