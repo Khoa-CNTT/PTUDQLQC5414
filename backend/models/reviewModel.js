@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const reviewSchema = new mongoose.Schema({
-    productId: { type: mongoose.Schema.Types.ObjectId, ref: "product", required: true },
+    productId: { type: mongoose.Schema.Types.ObjectId, ref: "Product", required: true },
     username: { type: String, required: true },
     rating: { type: Number, required: true }, // từ 1 đến 5 sao
     comment: { type: String, required: true },

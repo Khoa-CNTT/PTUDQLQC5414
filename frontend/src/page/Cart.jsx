@@ -11,20 +11,27 @@ const Cart = () => {
     useEffect(() => {
         if (products.length > 0) {
             const tempData = [];
-            for (const items in cartItems) {
-                for (const item in cartItems[items]) {
-                    if (cartItems[items][item] > 0) {
-                        tempData.push({
-                            _id: items,
-                            size: item,
-                            quantity: cartItems[items][item]
-                        });
+
+            for (const productId in cartItems) {
+                for (const size in cartItems[productId]) {
+                    for (const subCategory in cartItems[productId][size]) {
+                        const quantity = cartItems[productId][size][subCategory];
+                        if (quantity > 0) {
+                            tempData.push({
+                                _id: productId,
+                                size: size,
+                                subCategory: subCategory,
+                                quantity: quantity
+                            });
+                        }
                     }
                 }
             }
+
             setCartData(tempData);
         }
     }, [cartItems, products]);
+
     return (
         <div className='border-t pt-14'>
             <div className='text-2xl mb-3'>
@@ -58,6 +65,9 @@ const Cart = () => {
                                         <p className='px-2 sm:px-3 sm:py-1 border bg-slate-50'>
                                             {item.size}
                                         </p>
+                                        <p className='px-2 sm:px-3 sm:py-1 border bg-slate-50'>
+                                            {item.subCategory}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -69,6 +79,7 @@ const Cart = () => {
                                         : updateQuantity(
                                             item._id,
                                             item.size,
+                                            item.subCategory,
                                             Number(e.target.value)
                                         )
                                 }
@@ -79,7 +90,7 @@ const Cart = () => {
                             />
                             <img
                                 onClick={() =>
-                                    updateQuantity(item._id, item.size, 0)
+                                    updateQuantity(item._id, item.size, item.subCategory, 0)
                                 }
                                 src={assets.bin_icon}
                                 alt=''

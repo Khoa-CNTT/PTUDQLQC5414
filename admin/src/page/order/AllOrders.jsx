@@ -76,6 +76,7 @@ const AllOrders = ({ token }) => {
                                     <p className="py-0.5" key={idx}>
                                         <span className="font-medium">{item.name}</span> x {item.quantity}{' '}
                                         <span className="italic text-gray-500">({item.size})</span>
+                                        <span className="italic text-gray-500">({item.subCategory})</span>
                                     </p>
                                 ))}
                             </div>

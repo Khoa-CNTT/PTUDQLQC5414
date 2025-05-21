@@ -7,7 +7,7 @@ export const ShopContext = createContext();
 
 const ShopContextProvider = (props) => {
     const currency = '$';
-    const delivery_fee = 10;
+    const delivery_fee = 3;
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const [search, setSearch] = useState('');
     const [showSearch, setShowSearch] = useState(false);
@@ -38,86 +38,115 @@ const ShopContextProvider = (props) => {
     };
 
     //add vào cart
-    const addToCart = (itemId, size) => {
-        if (!size) {
-            // toast.error('Select Product Size');
-            alert('Select Product Size');
+    const addToCart = (itemId, size, subCategory) => {
+        if (!size || !subCategory) {
+            alert('Select Product Size and Subcategory');
             return;
         }
 
-        let cartData = structuredClone(cartItems); //Tạo bản sao deep copy để tránh thay đổi trực tiếp state cũ 
+        let cartData = structuredClone(cartItems); // Deep copy tránh mutation
 
-        if (cartData[itemId]) { //KTRA San pham co trong Cart chua
-            if (cartData[itemId][size]) {//KTRA SIZE
-                cartData[itemId][size] += 1; // +1
-            } else {
-                cartData[itemId][size] = 1; // tao size =1
-            }
+        // Khởi tạo các cấp nếu chưa tồn tại
+        if (!cartData[itemId]) cartData[itemId] = {};
+        if (!cartData[itemId][size]) cartData[itemId][size] = {};
+
+        if (cartData[itemId][size][subCategory]) {
+            cartData[itemId][size][subCategory] += 1;
         } else {
-            cartData[itemId] = { [size]: 1 }; // Tao san pham Cart
+            cartData[itemId][size][subCategory] = 1;
         }
 
         setCartItems(cartData);
 
+        // Nếu user đã login thì sync với backend
         if (token) {
-            axios.post(`${backendUrl}/api/cart/add`, { itemId, size }, {
+            axios.post(`${backendUrl}/api/cart/add`, {
+                itemId,
+                size,
+                subCategory
+            }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
-            })
-                .catch(error => {
-                    console.log(error);
-                    // toast.error(error.message);
-                });
+            }).catch(error => {
+                console.error("Error syncing cart:", error);
+            });
         }
     };
 
     //hiển thị Count trên cart Navbar
     const getCartCount = () => {
         let totalCount = 0;
-        for (const items in cartItems) { //items là key cấp 1 của cartItems
-            for (const item in cartItems[items]) { //Duyệt qua từng item con trong mỗi nhóm
-                try {
-                    if (cartItems[items][item] > 0) {
-                        totalCount += cartItems[items][item];
+        for (const itemId in cartItems) {
+            const sizes = cartItems[itemId];
+            for (const size in sizes) {
+                const subCategories = sizes[size];
+                for (const subCategory in subCategories) {
+                    const quantity = subCategories[subCategory];
+                    if (quantity > 0) {
+                        totalCount += quantity;
                     }
-                } catch (error) {
-                    console.log(error);
                 }
             }
         }
         return totalCount;
     };
 
-    const updateQuantity = (itemId, size, quantity) => {
-        let cartData = structuredClone(cartItems);
-        cartData[itemId][size] = quantity;
+    const updateQuantity = (itemId, size, subCategory, quantity) => {
+        const cartData = structuredClone(cartItems);
+
+        // Khởi tạo nếu chưa tồn tại
+        if (!cartData[itemId]) cartData[itemId] = {};
+        if (!cartData[itemId][size]) cartData[itemId][size] = {};
+
+        if (quantity === 0) {
+            delete cartData[itemId][size][subCategory];
+            // Nếu sau khi xóa không còn subCategory nào → xóa size
+            if (Object.keys(cartData[itemId][size]).length === 0) {
+                delete cartData[itemId][size];
+            }
+            // Nếu sau khi xóa không còn size nào → xóa itemId
+            if (Object.keys(cartData[itemId]).length === 0) {
+                delete cartData[itemId];
+            }
+        } else {
+            cartData[itemId][size][subCategory] = quantity;
+        }
+
         setCartItems(cartData);
 
         if (token) {
-            axios.post(`${backendUrl}/api/cart/update`, { itemId, size, quantity }, {
+            axios.post(`${backendUrl}/api/cart/update`, {
+                itemId,
+                size,
+                subCategory,
+                quantity
+            }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
-            })
-                .catch(error => {
-                    console.log(error);
-                    // toast.error(error.message);
-                });
+            }).catch(error => {
+                console.log(error);
+                // toast.error(error.message);
+            });
         }
     };
 
     const getCartAmount = () => {
         let totalAmount = 0;
-        for (const items in cartItems) {
-            let itemInfo = products.find((product) => product._id === items);
-            for (const item in cartItems[items]) {
-                try {
-                    if (cartItems[items][item] > 0) {
-                        totalAmount += itemInfo.price * cartItems[items][item];
+
+        for (const itemId in cartItems) {
+            const itemInfo = products.find((product) => product._id === itemId);
+            if (!itemInfo) continue;
+
+            const sizes = cartItems[itemId];
+            for (const size in sizes) {
+                const subCategories = sizes[size];
+                for (const subCategory in subCategories) {
+                    const quantity = subCategories[subCategory];
+                    if (quantity > 0) {
+                        totalAmount += itemInfo.price * quantity;
                     }
-                } catch (error) {
-                    console.log(error);
                 }
             }
         }

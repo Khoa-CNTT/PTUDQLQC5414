@@ -46,9 +46,9 @@ const RevenueCharts = ({ token }) => {
 
     return (
         <div className="flex flex-wrap gap-4">
-            <ChartBox title="📆 Revenue (Last 7 Days)" dataKey="_id" data={dayData} />
-            <ChartBox title="📈 Revenue (Last 4 Weeks)" dataKey="week" data={weekData} />
-            <ChartBox title="📊 Revenue (Last 12 Months)" dataKey="month" data={monthData} />
+            <ChartBox title="Revenue (Last 7 Days)" dataKey="_id" data={dayData} />
+            <ChartBox title="Revenue (Last 4 Weeks)" dataKey="week" data={weekData} />
+            <ChartBox title="Revenue (Last 12 Months)" dataKey="month" data={monthData} />
         </div>
     );
 };

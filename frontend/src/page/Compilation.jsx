@@ -119,9 +119,9 @@ const Compilation = () => {
                     </p>
 
                     {/* CATEGORY FILTER */}
-                    <div className={`border border-gray-300 px-3 py-3 mt-6 ${showFilter ? '' : 'hidden'} sm:block`}>
-                        <p className='mb-3 text-sm font-medium text-white'>CATEGORIES</p>
-                        <div className='flex flex-col gap-2 text-sm font-light text-white'>
+                    <div className={`border border-gray-300 bg-orange-50 rounded-md px-3 py-3 mt-6 ${showFilter ? '' : 'hidden'} sm:block`}>
+                        <p className='mb-3 text-sm font-medium text-black'>CATEGORIES</p>
+                        <div className='flex flex-col gap-2 text-sm text-black'>
                             {categories.map((cat, index) => (
                                 <label className='flex gap-2' key={index}>
                                     <input
@@ -138,9 +138,9 @@ const Compilation = () => {
                     </div>
 
                     {/* SUBCATEGORY FILTER */}
-                    <div className={`border border-gray-300 pl-5 py-3 my-5 ${showFilter ? '' : 'hidden'} sm:block`}>
-                        <p className='mb-3 text-sm font-medium text-white'>TYPE</p>
-                        <div className='flex flex-col gap-2 text-sm font-light text-white'>
+                    <div className={`border border-gray-300 bg-orange-50 rounded-md pl-5 py-3 my-5 ${showFilter ? '' : 'hidden'} sm:block`}>
+                        <p className='mb-3 text-sm font-medium text-black'>TYPE</p>
+                        <div className='flex flex-col gap-2 text-sm text-black'>
                             {categories.filter((cate) => category.includes(cate.name))
                                 .flatMap((cate) => cate.subCategories)
                                 .map((sub, index) => (
@@ -165,7 +165,7 @@ const Compilation = () => {
                         <Label text1={'ALL'} text2={'COMPILATIONS'} />
                         <select
                             onChange={(e) => setSortType(e.target.value)}
-                            className='border-2 border-gray-300 text-sm px-2 rounded-[15px]'
+                            className='border-2 bg-orange-50 text-sm px-2 rounded-[15px]'
                         >
                             <option value='relavent'>Sort by: Relavent</option>
                             <option value='low-high'>Sort by: Low to High</option>
